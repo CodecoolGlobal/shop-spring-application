@@ -1,5 +1,6 @@
 package com.codecool.springshopapplication.controller;
 
+import com.codecool.springshopapplication.exceptions.ProductNotFoundException;
 import com.codecool.springshopapplication.model.Product;
 import com.codecool.springshopapplication.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,12 @@ public class ProductController {
 
     @GetMapping("/products/{id}")
     public Product getProduct(@PathVariable long id) {
-        return service.getProductById(id).get();
+        return service
+                .getProductById(id)
+                .orElseThrow(ProductNotFoundException::new);
+        /*
+        orElseThrow(() -> new ProductNotFoundException());
+         */
     }
 
     @PostMapping("/products")
