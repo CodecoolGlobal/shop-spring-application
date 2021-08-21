@@ -1,20 +1,27 @@
-GET http://localhost:8080/products/1
-Accept: application/json
+POST http://localhost:8080/products/
+Content-Type: application/json
 
+{
+  "name": "12",
+  "brand": "iphone"
+}
 ###
-
-
-GET http://localhost:8080/products/
-Accept: application/json
-
-
-###
-
 
 POST http://localhost:8080/products/
 Content-Type: application/json
 
-{"name": "testing post product"}
+{
+  "name": "poco",
+  "brand": "redmi"
+}
+###
+
+GET http://localhost:8080/products/1
+Accept: application/json
+###
+
+GET http://localhost:8080/products/
+Accept: application/json
 
 ###
 

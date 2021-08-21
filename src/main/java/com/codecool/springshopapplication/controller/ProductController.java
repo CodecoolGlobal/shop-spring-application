@@ -1,48 +1,54 @@
 package com.codecool.springshopapplication.controller;
 
 import com.codecool.springshopapplication.model.Product;
+import com.codecool.springshopapplication.services.ProductService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @RestController
 //@RequestMapping("/products") // and with this you do not need to repeat /products
 public class ProductController {
 
+    private final ProductService service;
+
+    public ProductController(ProductService service) {
+        this.service = service;
+    }
+
     @GetMapping("/products")
-    public List<Product> getProducts(){
-        return List.of();
+    public List<Product> getProducts() {
+        return service.getAllProducts();
     }
 
     @GetMapping("/products/{id}")
-    public Product getProduct(@PathVariable String id){
-        Product mockProduct = new Product();
-
-        mockProduct.setId(1);
-        mockProduct.setName("Test product");
-
-        return mockProduct;
+    public Product getProduct(@PathVariable long id) {
+        return service.getProductById(id).get();
     }
 
     @PostMapping("/products")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product addProduct(@RequestBody Product product){
-        // add product
-        product.setId(11);
-        return product;
+    public Product addProduct(@RequestBody Product product) {
+        return service.createProduct(product);
     }
 
     @PutMapping("/products/{id}")
-    public void updateProduct(@PathVariable long id, @RequestBody Product product){
-        // update product
+    public Product updateProduct(@PathVariable long id,
+                                 @RequestBody Product product) {
+        return service.updateProduct(id, product);
     }
 
     @DeleteMapping("/products/{id}")
     @ResponseStatus(HttpStatus.OK) // optional - default set on this
-    public void deleteProduct(@PathVariable long id){
-        // delete product
+    public void deleteProduct(@PathVariable long id) {
+        service.deleteProduct(id);
     }
-
 }
