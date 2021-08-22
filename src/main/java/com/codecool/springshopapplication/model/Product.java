@@ -1,11 +1,8 @@
 package com.codecool.springshopapplication.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +18,10 @@ public class Product {
 
     @Column(length = 50)
     private String brand;
+
+    @ManyToOne()
+    @JsonBackReference
+    private Order order;
 
     public long getId() {
         return id;
@@ -44,6 +45,14 @@ public class Product {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override

@@ -1,3 +1,12 @@
+POST http://localhost:8080/orders/
+Content-Type: application/json
+
+{
+  "title": "daily shopping"
+}
+
+###
+
 POST http://localhost:8080/products/
 Content-Type: application/json
 
@@ -8,6 +17,7 @@ Content-Type: application/json
     "id": 1
   }
 }
+
 ###
 
 POST http://localhost:8080/products/
@@ -20,14 +30,10 @@ Content-Type: application/json
     "id": 1
   }
 }
+
 ###
 
-GET http://localhost:8080/products/1
-Accept: application/json
-###
-
-GET http://localhost:8080/products/
+GET http://localhost:8080/orders/1
 Accept: application/json
 
 ###
-

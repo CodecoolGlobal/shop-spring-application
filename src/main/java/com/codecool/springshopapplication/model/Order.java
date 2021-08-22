@@ -1,7 +1,11 @@
 package com.codecool.springshopapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -12,6 +16,10 @@ public class Order {
 
     @Column
     private String title;
+
+    @OneToMany(mappedBy="order")
+    @JsonManagedReference
+    private Set<Product> orderedProducts = new HashSet<>();
 
     public long getId() {
         return id;
@@ -29,6 +37,13 @@ public class Order {
         this.title = title;
     }
 
+    public Set<Product> getOrderedProducts() {
+        return orderedProducts;
+    }
+
+    public void setOrderedProducts(Set<Product> orderedProducts) {
+        this.orderedProducts = orderedProducts;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
