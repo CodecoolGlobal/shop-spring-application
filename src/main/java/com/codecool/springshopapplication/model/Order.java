@@ -1,9 +1,16 @@
 package com.codecool.springshopapplication.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "orders")
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @Column
     private String title;
 
     public long getId() {
